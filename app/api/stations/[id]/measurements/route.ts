@@ -12,10 +12,12 @@ const querySchema = z.object({
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } },
+  // В Next.js 15+ params — это Promise
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const { id } = params;
+    // ОБЯЗАТЕЛЬНО дожидаемся получения параметров
+    const { id } = await params;
     const { searchParams } = new URL(request.url);
 
     const validation = querySchema.safeParse(Object.fromEntries(searchParams));
