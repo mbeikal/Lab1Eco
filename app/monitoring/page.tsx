@@ -15,7 +15,7 @@ export default async function MonitoringPage() {
   ]);
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
+    <div className="space-y-6">
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-400 tracking-tight">
           Інтерактивний моніторинг

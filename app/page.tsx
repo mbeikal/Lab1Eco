@@ -17,7 +17,7 @@ export default async function HomePage() {
     : "N/A";
 
   return (
-    <div className="space-y-10 animate-in fade-in duration-500">
+    <div className="space-y-10">
       <div className="flex flex-col space-y-4">
         <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-400 tracking-tight">
           Екологічний моніторинг
