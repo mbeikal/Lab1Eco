@@ -1,18 +1,18 @@
-// app/api/stations/[id]/route.ts
+
 import { NextResponse } from "next/server";
 import { stations, measurements } from "@/data/mockData";
 import { ApiResponse } from "@/types/api";
-import { Station, Measurement } from "@/types/environment"; // Объединил импорты для чистоты
+import { Station, Measurement } from "@/types/environment";
 
 type StationWithMeasurements = Station & { currentMeasurement?: Measurement };
 
 export async function GET(
   request: Request,
-  // В Next.js 15+ типизируем как Promise
+
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    // Ждем разрешения промиса, чтобы получить id
+
     const { id } = await params;
 
     const station = stations.find((s) => s.id === id);

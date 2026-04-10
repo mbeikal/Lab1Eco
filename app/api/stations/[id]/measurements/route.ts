@@ -12,11 +12,11 @@ const querySchema = z.object({
 
 export async function GET(
   request: Request,
-  // В Next.js 15+ params — это Promise
+
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    // ОБЯЗАТЕЛЬНО дожидаемся получения параметров
+
     const { id } = await params;
     const { searchParams } = new URL(request.url);
 

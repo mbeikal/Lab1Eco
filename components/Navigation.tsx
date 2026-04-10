@@ -16,6 +16,7 @@ export function Navigation() {
 
           <div className="hidden md:flex items-center space-x-1">
             <NavLink href="/">Головна</NavLink>
+            <NavLink href="/monitoring">Моніторинг</NavLink>
             <NavLink href="/pollutants">Забруднювачі</NavLink>
             <NavLink href="/about">Про проєкт</NavLink>
           </div>

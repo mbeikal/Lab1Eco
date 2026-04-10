@@ -10,11 +10,20 @@ export interface PollutantData {
   co2?: number;
 }
 
+export type StationType = "urban" | "industrial" | "background";
+
+export type PollutionLevel = "good" | "moderate" | "unhealthy" | "hazardous";
+
 export interface Station {
   id: string;
   name: string;
   coordinates: Coordinates;
-  type: "urban" | "industrial" | "background";
+  type: StationType;
+}
+
+export interface StationWithAQI extends Station {
+  pollutionLevel: PollutionLevel;
+  currentData: PollutantData;
 }
 
 export interface Measurement {
