@@ -8,10 +8,44 @@ import {
   getPollutionLabel,
   getPollutionBadgeClass,
 } from "@/lib/pollution";
-import { TimeSeriesChart } from "./TimeSeriesChart";
-import { StationComparisonChart } from "./StationComparisonChart";
-import { PollutionStructureChart } from "./PollutionStructureChart";
 import { GlobalErrorBoundary } from "@/components/providers/GlobalErrorBoundary";
+
+const TimeSeriesChart = dynamic(
+  () => import("./TimeSeriesChart").then((mod) => mod.TimeSeriesChart),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[300px] bg-slate-50/50 rounded-xl animate-pulse flex items-center justify-center">
+        <span className="text-slate-400 text-sm font-medium">Завантаження графіка...</span>
+      </div>
+    ),
+  }
+);
+
+const StationComparisonChart = dynamic(
+  () => import("./StationComparisonChart").then((mod) => mod.StationComparisonChart),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[300px] bg-slate-50/50 rounded-xl animate-pulse flex items-center justify-center">
+        <span className="text-slate-400 text-sm font-medium">Завантаження порівняння...</span>
+      </div>
+    ),
+  }
+);
+
+const PollutionStructureChart = dynamic(
+  () => import("./PollutionStructureChart").then((mod) => mod.PollutionStructureChart),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[300px] bg-slate-50/50 rounded-xl animate-pulse flex items-center justify-center">
+        <span className="text-slate-400 text-sm font-medium">Завантаження структури...</span>
+      </div>
+    ),
+  }
+);
+
 
 
 const MonitoringMap = dynamic(() => import("./MonitoringMap"), {
