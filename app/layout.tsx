@@ -1,8 +1,9 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Navigation } from "@/components/Navigation";
-import { TransitionProvider } from "@/components/providers/TransitionProvider"; // <-- Додаємо імпорт
+import { TransitionProvider } from "@/components/providers/TransitionProvider";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
@@ -29,6 +30,11 @@ export default function RootLayout({
             {children}
           </TransitionProvider>
         </main>
+
+
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );

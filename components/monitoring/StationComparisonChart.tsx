@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import type { StationWithAQI } from "@/types/environment";
 import type { Measurement } from "@/types/environment";
 import { getPollutionColor, CHART_COLORS } from "@/lib/pollution";
+import { trackEvent } from "@/lib/analytics";
 import {
   BarChart,
   Bar,
@@ -133,7 +134,16 @@ export function StationComparisonChart({
               formatter={((value: any) => [`${value} µg/m³`, "PM2.5"]) as any}
               labelFormatter={(label) => `📍 ${label}`}
             />
-            <Bar dataKey="pm25" radius={[6, 6, 0, 0]} animationDuration={600}>
+            <Bar 
+              dataKey="pm25" 
+              radius={[6, 6, 0, 0]} 
+              animationDuration={600}
+              onClick={(data: any) => {
+                if (data && data.stationId) {
+                  trackEvent('chart_interaction', { chartType: 'bar', stationId: data.stationId });
+                }
+              }}
+            >
               {chartData.map((entry) => (
                 <Cell
                   key={entry.stationId}

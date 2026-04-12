@@ -5,6 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { StationWithAQI, StationType } from "@/types/environment";
 import { getPollutionColor, getPollutionLabel, POLLUTANT_META } from "@/lib/pollution";
+import { trackEvent } from "@/lib/analytics";
 
 
 const UKRAINE_CENTER: L.LatLngTuple = [48.5, 31.5];
@@ -153,6 +154,7 @@ export default function MonitoringMap({
         });
 
       marker.on("click", () => {
+        trackEvent('station_map_click', { stationId: station.id, stationName: station.name });
         onSelectRef.current(station.id);
       });
 

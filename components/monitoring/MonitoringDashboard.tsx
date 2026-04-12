@@ -11,6 +11,7 @@ import {
 import { TimeSeriesChart } from "./TimeSeriesChart";
 import { StationComparisonChart } from "./StationComparisonChart";
 import { PollutionStructureChart } from "./PollutionStructureChart";
+import { GlobalErrorBoundary } from "@/components/providers/GlobalErrorBoundary";
 
 
 const MonitoringMap = dynamic(() => import("./MonitoringMap"), {
@@ -85,8 +86,8 @@ export function MonitoringDashboard({
               key={filter.value}
               onClick={() => setFilterType(filter.value)}
               className={`px-3.5 py-1.5 text-xs font-semibold rounded-full border transition-all duration-200 ${filterType === filter.value
-                  ? "bg-emerald-500 text-white border-emerald-500 shadow-sm"
-                  : "bg-white text-slate-500 border-slate-200 hover:border-emerald-300 hover:text-emerald-600"
+                ? "bg-emerald-500 text-white border-emerald-500 shadow-sm"
+                : "bg-white text-slate-500 border-slate-200 hover:border-emerald-300 hover:text-emerald-600"
                 }`}
             >
               {filter.label}
@@ -166,22 +167,28 @@ export function MonitoringDashboard({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
             <div className="lg:col-span-2 bg-white/60 backdrop-blur-lg border border-slate-200/60 rounded-2xl p-6 shadow-sm">
-              <TimeSeriesChart history={selectedStationHistory} />
+              <GlobalErrorBoundary componentName="TimeSeriesChart">
+                <TimeSeriesChart history={selectedStationHistory} />
+              </GlobalErrorBoundary>
             </div>
 
             <div className="bg-white/60 backdrop-blur-lg border border-slate-200/60 rounded-2xl p-6 shadow-sm">
-              <StationComparisonChart
-                stations={stations}
-                measurements={measurements}
-                selectedStationId={selectedStationId}
-              />
+              <GlobalErrorBoundary componentName="StationComparisonChart">
+                <StationComparisonChart
+                  stations={stations}
+                  measurements={measurements}
+                  selectedStationId={selectedStationId}
+                />
+              </GlobalErrorBoundary>
             </div>
 
             <div className="bg-white/60 backdrop-blur-lg border border-slate-200/60 rounded-2xl p-6 shadow-sm">
-              <PollutionStructureChart
-                data={selectedStation.currentData}
-                stationName={selectedStation.name}
-              />
+              <GlobalErrorBoundary componentName="PollutionStructureChart">
+                <PollutionStructureChart
+                  data={selectedStation.currentData}
+                  stationName={selectedStation.name}
+                />
+              </GlobalErrorBoundary>
             </div>
           </div>
         </div>

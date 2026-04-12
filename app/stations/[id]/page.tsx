@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getStationById } from "@/services/stationService";
 import { MeasurementsChart } from "@/components/MeasurementsChart";
+import { StationViewTracker } from "@/components/monitoring/StationViewTracker";
 
 export default async function StationPage({
   params,
@@ -16,6 +17,7 @@ export default async function StationPage({
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
+      <StationViewTracker stationId={station.id} stationName={station.name} />
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-slate-200/60">
         <div>
           <div className="flex items-center gap-3 mb-2">
